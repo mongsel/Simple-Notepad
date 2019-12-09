@@ -2,39 +2,54 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <link id="theme_css" rel="stylesheet" href="./style.css" type="text/css" media="screen"/>
     <title>Notepad</title>
-    <style type="text/css">
-      body,html{
-          margin:0;
-          padding:0;
-      }
-      #txtEditor{
-          width:786px;
-          height:539px;
-          padding:4px;
-          margin:0px;
-          border:0px;
-          font-size: 16px;
-          resize:none;
-          outline:none;
-      }
-      #txtEditor:focus{
-          border:0px;
-          outline:none;
-      }
-      .bottom {
-        height: 20px;
-        font-size: 12px;
-        color: #666666;
-        text-align: right;
-        padding-right: 20px;
-        display: block;
-      }
-  </style>
   </head>
   <body>
-    <textarea id="txtEditor"></textarea>
-    <div class="bottom">字数：<span id="txtNum">0</span></div>
+    <div class="header">
+      <div class="onTop"></div>
+      <div class="menuList">
+          <ul>
+              <li class="dropdown">
+                  <p id="a" class="dropbtn" onclick="showList(this)">文件(F)</p>
+                  <div class="dropdown-content" id="dropdown-a">
+                      <p onclick="menuClick('new')">新建<span class="keyQ">Ctrl+N</span></p>
+                      <p onclick="menuClick('open')">打开<span class="keyQ">Ctrl+O</span></p>
+                      <p onclick="menuClick('save')">保存<span class="keyQ">Ctrl+S</span></p>
+                      <p onclick="menuClick('save-as')" class="menuS">另存为... <span class="keyQ">Ctrl+Shift+S</span></p>
+                      <p onclick="winCtrlBtn('win_close')">退出<span class="keyQ">Ctrl+S</span></p>
+                  </div>
+              </li>
+              <li class="dropdown">
+                  <p id="b" class="dropbtn" onclick="showList(this)">编辑(E)</p>
+                  <div class="dropdown-content" id="dropdown-b">
+                      <p onclick="docCommand('undo')">返回<span class="keyQ">Ctrl+Z</span></p>
+                      <p onclick="docCommand('redo')" class="menuS">重做<span class="keyQ">Ctrl+Y</span></p>
+                      <p onclick="docCommand('cut')">剪切<span class="keyQ">Ctrl+X</span></p>
+                      <p onclick="docCommand('copy')">复制<span class="keyQ">Ctrl+C</span></p>
+                      <p onclick="docCommand('paste')">粘贴<span class="keyQ">Ctrl+V</span></p>
+                      <p onclick="docCommand('delete')" class="menuS">删除<span class="keyQ">Ctrl+D</span></p>
+                      <p onclick="docCommand('seletAll')">全选<span class="keyQ">Ctrl+A</span></p>
+                  </div>
+              </li>
+              <li clcass="dropdown">
+                <p id="c" class="dropbtn" onclick="showList(this)">帮助(H)</p>
+                  <div class="dropdown-content" id="dropdown-c">
+                    <p onclick="theme()">换肤</p>
+                    <p onclick="aboutMe()">关于...</p>
+                  </div>
+              </li>
+          </ul>
+      </div>
+      <div id="mainTitle" class="mainTitle">Notepad</div>
+      <div class="ctrlBtn">
+        <p id="win_min" class="win_min" onclick="winCtrlBtn('win_min')"></p>
+        <p id="win_max" class="win_max" onclick="winCtrlBtn('win_max')"></p>
+        <p id="win_close" class="win_close" onclick="winCtrlBtn('win_close')"></p>
+      </div>
+    </div>
+    <div class="txtBox"><textarea class="txtEditor" id="txtEditor"></textarea></div>
+    <div class="bottom">字数：<span class="txtNum" id="txtNum">0</span></div>
     <script src="./renderer.js"></script>
   </body>
 </html>

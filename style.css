@@ -1,0 +1,191 @@
+body, html {
+    margin:0;
+    padding:0;
+    height: 100%; 
+    overflow: hidden;
+}
+
+.txtBox {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 30px;
+    padding-bottom: 50px;
+    box-sizing: border-box;
+}
+
+.txtEditor{
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    resize:none;
+    outline:none;
+    border:0px;
+    box-sizing: border-box;
+    cursor:auto;
+    overflow-y:scroll;
+}
+
+.txtEditor:focus{
+    border:0px;
+    outline:none;
+}
+
+.bottom {
+    height: 19px;
+    width: 100%;
+    font-size: 12px;
+    color: #666666;
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid #cccccc;
+    background-color: #f2f2f2;
+}
+
+.txtNum {
+    padding-right: 20px;
+}
+
+
+.header {
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+    height: 29px;
+    width: 100%;
+    background: #ffffff url(images/logo-24.svg) no-repeat 2px 2px;
+    border-bottom: 1px solid #cccccc;
+    position: absolute;
+    top: 0;
+    z-index:1;
+}
+
+/*Menu************************************************/
+.menuList {
+    width: 210px;
+    margin: 0;
+    padding: 0;
+    float: left;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    line-height: 28px;
+    font-size: 14px;
+    margin-left: 34px;
+}
+li {
+    float: left;
+    -webkit-user-select: none;
+    -webkit-app-region: no-drag;
+}
+li p, .dropbtn {
+    display: inline-block;
+    color: #000000;
+    text-align: center;
+    padding: 1px 6px;
+    text-decoration: none;
+    margin: 0;
+}
+li p:hover, .dropdown:hover .dropbtn {
+    background-color: #d5e9ff;
+}
+li.dropdown {
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fafafa;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
+}
+.dropdown-content p {
+    color: #000000;
+    padding: 1px 16px;
+    margin: 0;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+.dropdown-content p:hover {
+    background-color: #d5e9ff;
+}
+.show {
+    display: block;
+}
+
+.keyQ{
+    float: right;
+    padding-left: 10px;
+    font-size: 13px;
+    color: #707070;
+}
+.menuS{
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.ctrlBtn {
+    -webkit-user-select: none;
+    -webkit-app-region: no-drag;
+    height: 29px;
+    width: 120px;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.ctrlBtn p {
+    width: 40px;
+    height: 29px;
+    float: left;
+    margin: 0;
+    padding: 0;
+    line-height: 29px;
+    display: block;
+}
+
+.win_min {
+    background: url(images/ctrl-btn.png) no-repeat 0 0;
+}
+.ctrlBtn p:hover {
+    background-color: #d5e9ff !important;
+}
+.win_max {
+    background: url(images/ctrl-btn.png) no-repeat 0 -30px;
+}
+.win_close {
+    background: url(images/ctrl-btn.png) no-repeat 0 -90px;
+}
+#win_close:hover {
+    background: #cb2c2c url(images/ctrl-btn.png) no-repeat -40px -90px !important;
+}
+
+.mainTitle {
+    height: 29px;
+    font-size: 13px;
+    line-height: 30px;
+    margin-left: 210px;
+    margin-right: 120px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    top: 0;
+}
+
+.onTop {
+    -webkit-user-select: none;
+    -webkit-app-region: no-drag;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}

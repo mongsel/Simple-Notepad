@@ -1,5 +1,7 @@
 const {app, BrowserWindow, ipcMain, Menu} = require('electron');
 const path = require('path');
+const fs = require('fs'); // 引入 NodeJS 的 fs 模块
+
 
 // 主菜单模板
 const menuTemplate = [
@@ -56,19 +58,13 @@ const menuTemplate = [
       { label: '粘贴', accelerator: 'CmdOrCtrl+V', role: 'paste' },
       { label: '删除', accelerator: 'CmdOrCtrl+D', role: 'delete' },
       { type: 'separator' },  //分隔线
-      { label: '全选', accelerator: 'CmdOrCtrl+A', role: 'selectall' } 
-    ]
-  },
-  {
-    label: ' 帮助 ',
-    submenu: [
-      {
-        label: '关于...  ',
-        click: async () => {
-          const { shell } = require('electron');
-          await shell.openExternal('https://segmentfault.com/u/shaomeng');
+      { label: '全选', accelerator: 'CmdOrCtrl+A', role: 'selectall' },
+      { label: 'DevTools', accelerator: 'CmdOrCtrl+I', 
+          click: function() {
+            mainWindow.webContents.openDevTools();
         }
-      }
+      },
+      { accelerator: 'CmdOrCtrl+R', role: 'reload' }
     ]
   }
 ];
@@ -82,24 +78,37 @@ let safeExit = false;
 let menu = Menu.buildFromTemplate (menuTemplate);
 Menu.setApplicationMenu (menu);
 
+// 读取窗体保存数据
+var data = fs.readFileSync('./data.json');
+var myData = JSON.parse(data);
+
 // 主窗体初始化
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 620,
-    resizable:false,
-    backgroundColor: '#e9e9e9',
+    x: myData.positionX,
+    y: myData.positionY,
+    width: myData.width,
+    height: myData.height,
+    minWidth: 400,
+    minHeight: 300,
+    frame: false,
+    backgroundColor: '#000000',
+    show: false,
     webPreferences: {
-      nodeIntegration: true,
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true
     }
+  });
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
   });
 
   // 加载页面内容
   mainWindow.loadFile('index.html');
 
   // 开发者工具
-  // mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   // 窗体生命周期 close 操作
   mainWindow.on('close', (e) => {
@@ -126,8 +135,23 @@ app.on('activate', function() {
 });
 
 
-// 接收退出命令
-ipcMain.on('exit', function() {
-  safeExit = true;
-  app.quit();
+
+// 窗体操作
+ipcMain.on('reqaction', (event, arg) => {
+  switch(arg) {
+    case 'exit': // 接收退出命令
+      safeExit = true;
+      app.quit();
+      break;
+    case 'win-min': // 接收最小化命令
+      mainWindow.minimize();
+      break;
+    case 'win-max': // 接收最大化命令
+      if(mainWindow.isMaximized()) {
+        mainWindow.restore();  
+      } else {
+        mainWindow.maximize(); 
+      }
+      break;
+  }
 });
